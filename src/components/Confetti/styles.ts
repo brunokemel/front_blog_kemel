@@ -1,23 +1,5 @@
 import styled, { keyframes } from 'styled-components'
 
-interface ConfettiProps {
-  active: boolean
-}
-
-const pieces = Array.from({ length: 28 }, (_, index) => index)
-
-export function Confetti({ active }: ConfettiProps) {
-  if (!active) return null
-
-  return (
-    <ConfettiLayer>
-      {pieces.map((piece) => (
-        <Piece key={piece} $left={(piece * 37) % 100} $delay={(piece % 7) * 0.08} />
-      ))}
-    </ConfettiLayer>
-  )
-}
-
 const fall = keyframes`
   0% {
     transform: translateY(-20px) rotate(0deg);
@@ -30,7 +12,7 @@ const fall = keyframes`
   }
 `
 
-const ConfettiLayer = styled.div`
+export const ConfettiLayer = styled.div`
   position: fixed;
   inset: 0;
   pointer-events: none;
@@ -38,7 +20,7 @@ const ConfettiLayer = styled.div`
   z-index: 20;
 `
 
-const Piece = styled.span<{ $left: number; $delay: number }>`
+export const Piece = styled.span<{ $left: number; $delay: number }>`
   position: absolute;
   top: -20px;
   left: ${({ $left }) => $left}%;
