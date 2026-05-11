@@ -41,11 +41,17 @@ export const UserText = styled.span`
   font-weight: 700;
 `
 
-export const LogoutButton = styled.button`
+export const AuthButton = styled.button`
   border: 1px solid #f97316;
   background: #ffffff;
   color: #9a3412;
   padding: 9px 14px;
   font-family: Arial, sans-serif;
   font-weight: 800;
+`
+
+export const PrimaryAuthButton = styled(AuthButton)`
+  background: #f97316;
+  color: #ffffff;
+  box-shadow: 4px 4px 0 #ffcf88;
 `

@@ -1,11 +1,12 @@
 import * as S from './styles'
 
 interface TopBarProps {
-  username: string
+  username?: string
   onLogout: () => void
+  onOpenAuth: (mode: 'login' | 'register') => void
 }
 
-export function TopBar({ username, onLogout }: TopBarProps) {
+export function TopBar({ username, onLogout, onOpenAuth }: TopBarProps) {
   return (
     <S.TopBar>
       <S.LogoBlock>
@@ -14,8 +15,17 @@ export function TopBar({ username, onLogout }: TopBarProps) {
       </S.LogoBlock>
 
       <S.UserArea>
-        <S.UserText>@{username}</S.UserText>
-        <S.LogoutButton onClick={onLogout}>Sair</S.LogoutButton>
+        {username ? (
+          <>
+            <S.UserText>@{username}</S.UserText>
+            <S.AuthButton onClick={onLogout}>Sair</S.AuthButton>
+          </>
+        ) : (
+          <>
+            <S.AuthButton onClick={() => onOpenAuth('login')}>Login</S.AuthButton>
+            <S.PrimaryAuthButton onClick={() => onOpenAuth('register')}>Registrar</S.PrimaryAuthButton>
+          </>
+        )}
       </S.UserArea>
     </S.TopBar>
   )

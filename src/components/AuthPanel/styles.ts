@@ -1,18 +1,39 @@
 import styled from 'styled-components'
 
 export const AuthWrapper = styled.main`
-  min-height: 100vh;
+  position: fixed;
+  inset: 0;
+  z-index: 30;
   display: grid;
   place-items: center;
   padding: 24px;
+  background: rgba(45, 31, 20, 0.48);
 `
 
 export const AuthCard = styled.section`
+  position: relative;
   width: min(100%, 460px);
   background: #ffffff;
   border: 2px solid #ff9f1c;
   box-shadow: 10px 10px 0 #ffcf88;
   padding: 34px;
+`
+
+export const CloseButton = styled.button`
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #ffb65c;
+  background: #fff8ef;
+  color: #9a3412;
+  font-family: Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
 `
 
 export const Brand = styled.p`

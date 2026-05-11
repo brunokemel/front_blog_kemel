@@ -9,6 +9,7 @@ interface BlogFeedProps {
   topPosts: BlogPost[]
   newPost: string
   activeTab: FeedTab
+  isLoggedIn: boolean
   onNewPostChange: (value: string) => void
   onTabChange: (tab: FeedTab) => void
   onCreatePost: (event: React.FormEvent) => void
@@ -20,6 +21,7 @@ export function BlogFeed({
   topPosts,
   newPost,
   activeTab,
+  isLoggedIn,
   onNewPostChange,
   onTabChange,
   onCreatePost,
@@ -32,15 +34,21 @@ export function BlogFeed({
       <S.MainColumn>
         <S.Composer onSubmit={onCreatePost}>
           <S.ComposerTitle>Novo texto</S.ComposerTitle>
+          {!isLoggedIn && <S.LoginHint>Entre ou registre uma conta para publicar seu proprio texto.</S.LoginHint>}
           <S.TextArea
             maxLength={280}
-            placeholder="Escreva como se fosse um post perdido em 2011..."
+            placeholder={
+              isLoggedIn
+                ? 'Escreva como se fosse um post perdido em 2011...'
+                : 'Faça login para liberar a publicação.'
+            }
             value={newPost}
             onChange={(event) => onNewPostChange(event.target.value)}
+            disabled={!isLoggedIn}
           />
           <S.ComposerFooter>
             <S.Counter>{newPost.length}/280</S.Counter>
-            <S.PublishButton>Publicar</S.PublishButton>
+            <S.PublishButton disabled={!isLoggedIn}>Publicar</S.PublishButton>
           </S.ComposerFooter>
         </S.Composer>
 

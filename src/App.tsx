@@ -14,6 +14,7 @@ function App() {
   const [posts, setPosts] = useState<BlogPost[]>(initialPosts)
   const [newPost, setNewPost] = useState('')
   const [activeTab, setActiveTab] = useState<FeedTab>('feed')
+  const [authMode, setAuthMode] = useState<'login' | 'register' | null>(null)
   const [confettiActive, setConfettiActive] = useState(false)
 
   const topPosts = useMemo(() => {
@@ -65,14 +66,19 @@ function App() {
     setActiveTab('feed')
   }
 
-  if (!currentUser) {
-    return <AuthPanel onLogin={setCurrentUser} />
+  function handleLogin(user: UserAccount) {
+    setCurrentUser(user)
+    setAuthMode(null)
   }
 
   return (
     <Page>
       <Confetti active={confettiActive} />
-      <TopBar username={currentUser.username} onLogout={() => setCurrentUser(null)} />
+      <TopBar
+        username={currentUser?.username}
+        onLogout={() => setCurrentUser(null)}
+        onOpenAuth={setAuthMode}
+      />
       <HeroSection />
       <BannerCarousel />
       <BlogFeed
@@ -80,11 +86,19 @@ function App() {
         topPosts={topPosts}
         newPost={newPost}
         activeTab={activeTab}
+        isLoggedIn={Boolean(currentUser)}
         onNewPostChange={setNewPost}
         onTabChange={setActiveTab}
         onCreatePost={handleCreatePost}
         onLike={handleLike}
       />
+      {authMode && (
+        <AuthPanel
+          initialMode={authMode}
+          onLogin={handleLogin}
+          onClose={() => setAuthMode(null)}
+        />
+      )}
     </Page>
   )
 }

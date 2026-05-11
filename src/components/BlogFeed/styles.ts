@@ -31,6 +31,15 @@ export const ComposerTitle = styled.h2`
   margin-bottom: 12px;
 `
 
+export const LoginHint = styled.p`
+  background: #fff2df;
+  border-left: 4px solid #f97316;
+  color: #6b3b10;
+  padding: 10px;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+`
+
 export const TextArea = styled.textarea`
   width: 100%;
   min-height: 130px;
@@ -40,6 +49,12 @@ export const TextArea = styled.textarea`
   padding: 14px;
   line-height: 1.6;
   outline-color: #f97316;
+
+  &:disabled {
+    color: #8a5a24;
+    cursor: not-allowed;
+    opacity: 0.72;
+  }
 `
 
 export const ComposerFooter = styled.div`
@@ -62,6 +77,12 @@ export const PublishButton = styled.button`
   font-family: Arial, sans-serif;
   font-weight: 800;
   box-shadow: 4px 4px 0 #ffcf88;
+
+  &:disabled {
+    background: #c9a17a;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
 `
 
 export const Tabs = styled.div`

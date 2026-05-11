@@ -3,7 +3,9 @@ import type { UserAccount } from '../../types'
 import * as S from './styles'
 
 interface AuthPanelProps {
+  initialMode: 'login' | 'register'
   onLogin: (user: UserAccount) => void
+  onClose: () => void
 }
 
 const demoUser: UserAccount = {
@@ -14,8 +16,8 @@ const demoUser: UserAccount = {
   password: '123456',
 }
 
-export function AuthPanel({ onLogin }: AuthPanelProps) {
-  const [mode, setMode] = useState<'login' | 'register'>('login')
+export function AuthPanel({ initialMode, onLogin, onClose }: AuthPanelProps) {
+  const [mode, setMode] = useState<'login' | 'register'>(initialMode)
   const [accounts, setAccounts] = useState<UserAccount[]>([demoUser])
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -78,8 +80,11 @@ export function AuthPanel({ onLogin }: AuthPanelProps) {
   }
 
   return (
-    <S.AuthWrapper>
+    <S.AuthWrapper role="dialog" aria-modal="true" aria-label={mode === 'login' ? 'Entrar no blog' : 'Criar conta'}>
       <S.AuthCard>
+        <S.CloseButton type="button" onClick={onClose} aria-label="Fechar login">
+          ×
+        </S.CloseButton>
         <S.Brand>DevKemel Old Blog</S.Brand>
         <S.Title>{mode === 'login' ? 'Entrar no blog' : 'Criar conta'}</S.Title>
         <S.Description>
