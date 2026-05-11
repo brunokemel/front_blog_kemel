@@ -4,6 +4,7 @@ export interface UserAccount {
   email: string
   username: string
   password: string
+  profileImage?: string
 }
 
 export interface BlogPost {

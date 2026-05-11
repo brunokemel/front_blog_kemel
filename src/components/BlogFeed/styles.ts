@@ -183,13 +183,25 @@ export const Sidebar = styled.aside`
 `
 
 export const ProfileBox = styled.section`
+  width: 100%;
   display: grid;
   grid-template-columns: 54px 1fr;
   gap: 12px;
   align-items: center;
+  border: 0;
+  background: transparent;
   padding-bottom: 18px;
   margin-bottom: 18px;
   border-bottom: 1px dashed #ffc078;
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+
+  &:is(button):hover h2 {
+    text-decoration: underline;
+    text-decoration-color: #f97316;
+    text-underline-offset: 4px;
+  }
 `
 
 export const ProfileAvatar = styled.div`
@@ -204,6 +216,13 @@ export const ProfileAvatar = styled.div`
   font-size: 1.5rem;
   font-weight: 800;
   text-transform: uppercase;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `
 
 export const ProfileInfo = styled.div`

@@ -4,6 +4,7 @@ import { BannerCarousel } from './components/BannerCarousel'
 import { BlogFeed, type FeedTab } from './components/BlogFeed'
 import { Confetti } from './components/Confetti'
 import { HeroSection } from './components/HeroSection'
+import { ProfilePage } from './components/ProfilePage'
 import { TopBar } from './components/TopBar'
 import { initialPosts } from './data/initialPosts'
 import { Page } from './styles/AppStyles'
@@ -16,6 +17,7 @@ function App() {
   const [newPostImages, setNewPostImages] = useState<string[]>([])
   const [activeTab, setActiveTab] = useState<FeedTab>('feed')
   const [authMode, setAuthMode] = useState<'login' | 'register' | null>(null)
+  const [currentPage, setCurrentPage] = useState<'feed' | 'profile'>('feed')
   const [confettiActive, setConfettiActive] = useState(false)
 
   const topPosts = useMemo(() => {
@@ -74,30 +76,54 @@ function App() {
     setAuthMode(null)
   }
 
+  function handleLogout() {
+    setCurrentUser(null)
+    setCurrentPage('feed')
+  }
+
+  function handleProfilePhotoChange(photo: string) {
+    setCurrentUser((user) => (user ? { ...user, profileImage: photo } : user))
+  }
+
   return (
     <Page>
       <Confetti active={confettiActive} />
       <TopBar
         username={currentUser?.username}
-        onLogout={() => setCurrentUser(null)}
+        onLogout={handleLogout}
+        onOpenProfile={() => currentUser && setCurrentPage('profile')}
         onOpenAuth={setAuthMode}
       />
-      <HeroSection />
-      <BannerCarousel />
-      <BlogFeed
-        posts={posts}
-        topPosts={topPosts}
-        newPost={newPost}
-        newPostImages={newPostImages}
-        activeTab={activeTab}
-        currentUser={currentUser}
-        isLoggedIn={Boolean(currentUser)}
-        onNewPostChange={setNewPost}
-        onNewPostImagesChange={setNewPostImages}
-        onTabChange={setActiveTab}
-        onCreatePost={handleCreatePost}
-        onLike={handleLike}
-      />
+      {currentPage === 'profile' && currentUser ? (
+        <ProfilePage
+          user={currentUser}
+          posts={posts}
+          topPosts={topPosts}
+          onBack={() => setCurrentPage('feed')}
+          onLike={handleLike}
+          onPhotoChange={handleProfilePhotoChange}
+        />
+      ) : (
+        <>
+          <HeroSection />
+          <BannerCarousel />
+          <BlogFeed
+            posts={posts}
+            topPosts={topPosts}
+            newPost={newPost}
+            newPostImages={newPostImages}
+            activeTab={activeTab}
+            currentUser={currentUser}
+            isLoggedIn={Boolean(currentUser)}
+            onNewPostChange={setNewPost}
+            onNewPostImagesChange={setNewPostImages}
+            onTabChange={setActiveTab}
+            onCreatePost={handleCreatePost}
+            onLike={handleLike}
+            onOpenProfile={() => setCurrentPage('profile')}
+          />
+        </>
+      )}
       {authMode && (
         <AuthPanel
           initialMode={authMode}

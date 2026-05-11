@@ -3,10 +3,11 @@ import * as S from './styles'
 interface TopBarProps {
   username?: string
   onLogout: () => void
+  onOpenProfile: () => void
   onOpenAuth: (mode: 'login' | 'register') => void
 }
 
-export function TopBar({ username, onLogout, onOpenAuth }: TopBarProps) {
+export function TopBar({ username, onLogout, onOpenProfile, onOpenAuth }: TopBarProps) {
   return (
     <S.TopBar>
       <S.LogoBlock>
@@ -17,7 +18,9 @@ export function TopBar({ username, onLogout, onOpenAuth }: TopBarProps) {
       <S.UserArea>
         {username ? (
           <>
-            <S.UserText>@{username}</S.UserText>
+            <S.UserButton type="button" onClick={onOpenProfile}>
+              @{username}
+            </S.UserButton>
             <S.AuthButton onClick={onLogout}>Sair</S.AuthButton>
           </>
         ) : (

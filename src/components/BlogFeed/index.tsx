@@ -17,6 +17,7 @@ interface BlogFeedProps {
   onTabChange: (tab: FeedTab) => void
   onCreatePost: (event: React.FormEvent) => void
   onLike: (postId: string) => void
+  onOpenProfile: () => void
 }
 
 export function BlogFeed({
@@ -32,6 +33,7 @@ export function BlogFeed({
   onTabChange,
   onCreatePost,
   onLike,
+  onOpenProfile,
 }: BlogFeedProps) {
   const visiblePosts = activeTab === 'feed' ? posts : topPosts
   const userPosts = currentUser
@@ -137,8 +139,18 @@ export function BlogFeed({
       </S.MainColumn>
 
       <S.Sidebar>
-        <S.ProfileBox>
-          <S.ProfileAvatar>{currentUser ? currentUser.name.charAt(0) : '?'}</S.ProfileAvatar>
+        <S.ProfileBox
+          as={currentUser ? 'button' : 'section'}
+          type={currentUser ? 'button' : undefined}
+          onClick={currentUser ? onOpenProfile : undefined}
+        >
+          <S.ProfileAvatar>
+            {currentUser?.profileImage ? (
+              <img src={currentUser.profileImage} alt={`Foto de perfil de ${currentUser.name}`} />
+            ) : (
+              currentUser ? currentUser.name.charAt(0) : '?'
+            )}
+          </S.ProfileAvatar>
           <S.ProfileInfo>
             <S.ProfileName>{currentUser ? currentUser.name : 'Perfil'}</S.ProfileName>
             <S.ProfileUser>{currentUser ? `@${currentUser.username}` : 'Entre para publicar textos e fotos.'}</S.ProfileUser>

@@ -41,6 +41,20 @@ export const UserText = styled.span`
   font-weight: 700;
 `
 
+export const UserButton = styled.button`
+  border: 0;
+  background: transparent;
+  color: #7c4a1f;
+  font-weight: 700;
+  padding: 4px;
+
+  &:hover {
+    color: #f97316;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+`
+
 export const AuthButton = styled.button`
   border: 1px solid #f97316;
   background: #ffffff;
