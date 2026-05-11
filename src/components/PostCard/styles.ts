@@ -51,6 +51,25 @@ export const Content = styled.p`
   white-space: pre-wrap;
 `
 
+export const ImageGrid = styled.div<{ $count: number }>`
+  display: grid;
+  grid-template-columns: ${({ $count }) => ($count > 1 ? '1fr 1fr' : '1fr')};
+  gap: 10px;
+  margin-top: 16px;
+
+  img {
+    width: 100%;
+    aspect-ratio: ${({ $count }) => ($count > 1 ? '1 / 1' : '16 / 10')};
+    object-fit: cover;
+    border: 1px solid #ffd6a1;
+    background: #fff8ef;
+  }
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+`
+
 export const Footer = styled.footer`
   display: flex;
   align-items: center;

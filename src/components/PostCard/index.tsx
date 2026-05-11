@@ -20,7 +20,14 @@ export function PostCard({ post, onLike, highlight = false }: PostCardProps) {
         {highlight && <S.Badge>Destaque</S.Badge>}
       </S.Header>
 
-      <S.Content>{post.content}</S.Content>
+      {post.content && <S.Content>{post.content}</S.Content>}
+      {post.images.length > 0 && (
+        <S.ImageGrid $count={post.images.length}>
+          {post.images.map((image, index) => (
+            <img key={`${image}-${index}`} src={image} alt={`Foto ${index + 1} do post de ${post.authorName}`} />
+          ))}
+        </S.ImageGrid>
+      )}
 
       <S.Footer>
         <S.LikeButton $liked={post.likedByMe} onClick={() => onLike(post.id)}>

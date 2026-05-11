@@ -7,6 +7,7 @@ export const initialPosts: BlogPost[] = [
     username: 'devkemel',
     content:
       'Tem texto que não precisa gritar para ser forte. Às vezes, só precisa parecer escrito às 02h da manhã em um blog esquecido da internet.',
+    images: [],
     createdAt: 'Segunda, 08:20',
     likes: 42,
     likedByMe: false,
@@ -17,6 +18,7 @@ export const initialPosts: BlogPost[] = [
     username: 'anascript',
     content:
       'A internet antiga tinha menos pressa. Você lia um texto, pensava sobre ele e talvez deixasse um comentário que virava conversa.',
+    images: [],
     createdAt: 'Terça, 19:45',
     likes: 31,
     likedByMe: false,
@@ -27,6 +29,7 @@ export const initialPosts: BlogPost[] = [
     username: 'caiofront',
     content:
       'Construir interface também é construir sensação. Cor, espaço e texto contam uma história antes do usuário clicar em qualquer coisa.',
+    images: [],
     createdAt: 'Quarta, 12:10',
     likes: 27,
     likedByMe: false,
@@ -37,6 +40,7 @@ export const initialPosts: BlogPost[] = [
     username: 'liadev',
     content:
       'O post curto tem a força de um bilhete deixado na mesa. Não explica tudo, mas deixa uma porta aberta.',
+    images: [],
     createdAt: 'Quinta, 22:14',
     likes: 18,
     likedByMe: false,

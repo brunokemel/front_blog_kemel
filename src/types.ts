@@ -11,6 +11,7 @@ export interface BlogPost {
   authorName: string
   username: string
   content: string
+  images: string[]
   createdAt: string
   likes: number
   likedByMe: boolean

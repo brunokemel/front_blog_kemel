@@ -57,6 +57,73 @@ export const TextArea = styled.textarea`
   }
 `
 
+export const PhotoTools = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 12px;
+`
+
+export const PhotoLabel = styled.label<{ $disabled: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #f97316;
+  background: ${({ $disabled }) => ($disabled ? '#ead1b8' : '#fff8ef')};
+  color: ${({ $disabled }) => ($disabled ? '#8a5a24' : '#9a3412')};
+  padding: 9px 12px;
+  font-family: Arial, sans-serif;
+  font-weight: 800;
+  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
+
+  input {
+    display: none;
+  }
+`
+
+export const PhotoLimit = styled.span`
+  color: #8a5a24;
+  font-size: 0.92rem;
+`
+
+export const PhotoPreviewGrid = styled.div<{ $count: number }>`
+  display: grid;
+  grid-template-columns: ${({ $count }) => ($count > 1 ? '1fr 1fr' : '1fr')};
+  gap: 10px;
+  margin-top: 12px;
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+`
+
+export const PhotoPreview = styled.div`
+  position: relative;
+
+  img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border: 1px solid #ffd6a1;
+    background: #fff8ef;
+  }
+
+  button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #f97316;
+    background: #ffffff;
+    color: #9a3412;
+    font-size: 1.2rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+`
+
 export const ComposerFooter = styled.div`
   display: flex;
   align-items: center;
@@ -113,6 +180,69 @@ export const Sidebar = styled.aside`
   border: 1px solid #f97316;
   box-shadow: 6px 6px 0 #ffcf88;
   padding: 20px;
+`
+
+export const ProfileBox = styled.section`
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px dashed #ffc078;
+`
+
+export const ProfileAvatar = styled.div`
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  background: #f97316;
+  color: #ffffff;
+  border: 2px solid #ffcf88;
+  font-family: Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+`
+
+export const ProfileInfo = styled.div`
+  min-width: 0;
+`
+
+export const ProfileName = styled.h2`
+  font-size: 1.12rem;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+`
+
+export const ProfileUser = styled.p`
+  color: #8a5a24;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+`
+
+export const ProfileStats = styled.div`
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  background: #fff3e0;
+  border: 1px solid #ffd6a1;
+  padding: 10px;
+
+  span {
+    color: #f97316;
+    font-family: Arial, sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+  }
+
+  small {
+    color: #6b3b10;
+    font-size: 0.9rem;
+  }
 `
 
 export const SidebarTitle = styled.h2`
