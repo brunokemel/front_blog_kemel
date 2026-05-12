@@ -14,7 +14,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState<UserAccount | null>(null)
   const [posts, setPosts] = useState<BlogPost[]>(initialPosts)
   const [newPost, setNewPost] = useState('')
-  const [newPostImages, setNewPostImages] = useState<string[]>([])
   const [activeTab, setActiveTab] = useState<FeedTab>('feed')
   const [authMode, setAuthMode] = useState<'login' | 'register' | null>(null)
   const [currentPage, setCurrentPage] = useState<'feed' | 'profile'>('feed')
@@ -76,14 +75,14 @@ function App() {
   function handleCreatePost(event: React.FormEvent) {
     event.preventDefault()
 
-    if (!currentUser || (!newPost.trim() && newPostImages.length === 0)) return
+    if (!currentUser || !newPost.trim()) return
 
     const post: BlogPost = {
       id: crypto.randomUUID(),
       authorName: currentUser.name,
       username: currentUser.username,
       content: newPost.trim(),
-      images: newPostImages,
+      images: [],
       createdAt: 'Agora mesmo',
       likes: 0,
       likedByMe: false,
@@ -92,7 +91,6 @@ function App() {
 
     setPosts((currentPosts) => [post, ...currentPosts])
     setNewPost('')
-    setNewPostImages([])
     setActiveTab('feed')
   }
 
@@ -137,12 +135,10 @@ function App() {
             posts={posts}
             topPosts={topPosts}
             newPost={newPost}
-            newPostImages={newPostImages}
             activeTab={activeTab}
             currentUser={currentUser}
             isLoggedIn={Boolean(currentUser)}
             onNewPostChange={setNewPost}
-            onNewPostImagesChange={setNewPostImages}
             onTabChange={setActiveTab}
             onCreatePost={handleCreatePost}
             onLike={handleLike}
