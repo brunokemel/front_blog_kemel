@@ -17,6 +17,7 @@ interface BlogFeedProps {
   onTabChange: (tab: FeedTab) => void
   onCreatePost: (event: React.FormEvent) => void
   onLike: (postId: string) => void
+  onComment: (postId: string, content: string) => void
   onOpenProfile: () => void
 }
 
@@ -33,6 +34,7 @@ export function BlogFeed({
   onTabChange,
   onCreatePost,
   onLike,
+  onComment,
   onOpenProfile,
 }: BlogFeedProps) {
   const visiblePosts = activeTab === 'feed' ? posts : topPosts
@@ -132,6 +134,9 @@ export function BlogFeed({
               key={post.id}
               post={post}
               onLike={onLike}
+              onComment={onComment}
+              currentUser={currentUser}
+              isLoggedIn={isLoggedIn}
               highlight={topPosts.some((topPost) => topPost.id === post.id)}
             />
           ))}

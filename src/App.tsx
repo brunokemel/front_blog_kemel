@@ -49,6 +49,30 @@ function App() {
     if (isTopPost) showConfetti()
   }
 
+  function handleComment(postId: string, content: string) {
+    if (!currentUser || !content.trim()) return
+
+    setPosts((currentPosts) =>
+      currentPosts.map((post) => {
+        if (post.id !== postId) return post
+
+        return {
+          ...post,
+          comments: [
+            ...post.comments,
+            {
+              id: crypto.randomUUID(),
+              authorName: currentUser.name,
+              username: currentUser.username,
+              content: content.trim(),
+              createdAt: 'Agora mesmo',
+            },
+          ],
+        }
+      }),
+    )
+  }
+
   function handleCreatePost(event: React.FormEvent) {
     event.preventDefault()
 
@@ -63,6 +87,7 @@ function App() {
       createdAt: 'Agora mesmo',
       likes: 0,
       likedByMe: false,
+      comments: [],
     }
 
     setPosts((currentPosts) => [post, ...currentPosts])
@@ -101,6 +126,7 @@ function App() {
           topPosts={topPosts}
           onBack={() => setCurrentPage('feed')}
           onLike={handleLike}
+          onComment={handleComment}
           onPhotoChange={handleProfilePhotoChange}
         />
       ) : (
@@ -120,6 +146,7 @@ function App() {
             onTabChange={setActiveTab}
             onCreatePost={handleCreatePost}
             onLike={handleLike}
+            onComment={handleComment}
             onOpenProfile={() => setCurrentPage('profile')}
           />
         </>

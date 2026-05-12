@@ -75,9 +75,7 @@ export const Footer = styled.footer`
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-top: 20px;
   padding-top: 14px;
-  border-top: 1px dashed #ffc078;
 `
 
 export const LikeButton = styled.button<{ $liked: boolean }>`
@@ -92,4 +90,117 @@ export const LikeButton = styled.button<{ $liked: boolean }>`
 export const Likes = styled.span`
   color: #8a5a24;
   font-size: 0.95rem;
+`
+
+export const PostTabs = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 20px;
+  border: 1px solid #ffd6a1;
+`
+
+export const TabButton = styled.button<{ $active: boolean }>`
+  border: 0;
+  background: ${({ $active }) => ($active ? '#f97316' : '#fff8ef')};
+  color: ${({ $active }) => ($active ? '#ffffff' : '#9a3412')};
+  padding: 11px 10px;
+  font-family: Arial, sans-serif;
+  font-weight: 800;
+`
+
+export const CommentsPanel = styled.section`
+  display: grid;
+  gap: 14px;
+  padding-top: 14px;
+`
+
+export const CommentList = styled.div`
+  display: grid;
+  gap: 10px;
+`
+
+export const CommentItem = styled.article`
+  background: #fff8ef;
+  border: 1px solid #ffd6a1;
+  padding: 12px;
+
+  p {
+    margin-top: 8px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+  }
+`
+
+export const CommentMeta = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: baseline;
+
+  strong {
+    font-family: Arial, sans-serif;
+    font-size: 0.95rem;
+  }
+
+  span {
+    color: #8a5a24;
+    font-size: 0.86rem;
+  }
+`
+
+export const EmptyComments = styled.p`
+  color: #8a5a24;
+  background: #fff8ef;
+  border: 1px dashed #ffc078;
+  padding: 12px;
+`
+
+export const CommentForm = styled.form`
+  display: grid;
+  gap: 10px;
+`
+
+export const CommentInput = styled.textarea`
+  width: 100%;
+  min-height: 82px;
+  resize: vertical;
+  border: 1px solid #ffb65c;
+  background: #fffdf8;
+  padding: 12px;
+  line-height: 1.5;
+  outline-color: #f97316;
+
+  &:disabled {
+    color: #8a5a24;
+    cursor: not-allowed;
+    opacity: 0.72;
+  }
+`
+
+export const CommentFooter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  span {
+    color: #8a5a24;
+    font-size: 0.9rem;
+  }
+`
+
+export const CommentButton = styled.button`
+  border: 0;
+  background: #f97316;
+  color: #ffffff;
+  padding: 9px 14px;
+  font-family: Arial, sans-serif;
+  font-weight: 800;
+  box-shadow: 3px 3px 0 #ffcf88;
+
+  &:disabled {
+    background: #c9a17a;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
 `

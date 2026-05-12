@@ -8,10 +8,11 @@ interface ProfilePageProps {
   topPosts: BlogPost[]
   onBack: () => void
   onLike: (postId: string) => void
+  onComment: (postId: string, content: string) => void
   onPhotoChange: (photo: string) => void
 }
 
-export function ProfilePage({ user, posts, topPosts, onBack, onLike, onPhotoChange }: ProfilePageProps) {
+export function ProfilePage({ user, posts, topPosts, onBack, onLike, onComment, onPhotoChange }: ProfilePageProps) {
   const userPosts = posts.filter((post) => post.username === user.username)
   const totalLikes = userPosts.reduce((sum, post) => sum + post.likes, 0)
 
@@ -66,6 +67,9 @@ export function ProfilePage({ user, posts, topPosts, onBack, onLike, onPhotoChan
               key={post.id}
               post={post}
               onLike={onLike}
+              onComment={onComment}
+              currentUser={user}
+              isLoggedIn
               highlight={topPosts.some((topPost) => topPost.id === post.id)}
             />
           ))
